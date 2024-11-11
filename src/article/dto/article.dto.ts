@@ -1,11 +1,21 @@
 import { ApiProperty } from '@nestjs/swagger'
 
 export class GetArticleDto {
-  @ApiProperty({
+  /*@ApiProperty({
     type: String,
     required: false
   })
-  id: string
+  id: string*/
+
+  @ApiProperty({
+    type: Number
+  })
+  size: number
+
+  @ApiProperty({
+    type: Number
+  })
+  index: number
 }
 
 export class DelArticleDto {
