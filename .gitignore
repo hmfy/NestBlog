@@ -2,8 +2,9 @@
 /dist
 /node_modules
 /build
-blogDB
+db
 package-lock.json
+files
 
 # Logs
 logs

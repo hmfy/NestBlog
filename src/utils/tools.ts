@@ -1,45 +1,65 @@
-import {CustomRes} from "./interface";
+import { CustomRes } from './interface'
+import { ArgumentMetadata, PipeTransform } from '@nestjs/common'
 
-export async function wrapperService (
-    waitService: () => Promise<any>,
-    mustFields?: {
-        data: object | number | string | undefined,
-        keyList: Array<string>
-    },
-    customValid?: () => undefined | {res: boolean, msg: string}
+export async function wrapperService(
+  waitService: () => Promise<any>,
+  mustFields?: {
+    data: object | number | string | undefined
+    keyList?: Array<string>
+  },
+  customValid?: () => undefined | { res: boolean; msg: string }
 ): Promise<CustomRes> {
-    try {
-        // 通用校验
-        if (typeof mustFields.data === 'object') {
-            const loseKey = mustFields.keyList.find(key => mustFields.data[key] === undefined)
-            return {
-                code: -1,
-                msg: `缺少参数 ${loseKey}`
-            }
-        } else {
-            // number string
-            if (mustFields.data === undefined) return {
-                code: -1,
-                msg: `缺少参数 ${mustFields.keyList[0]}`
-            }
+  try {
+    if (mustFields) {
+      // 通用校验
+      if (mustFields.data === undefined) {
+        return {
+          code: -1,
+          msg: `缺少参数`
         }
-
-        // 自定义校验
-        const customValidRes = customValid ? customValid() : ''
-        if (customValidRes && customValidRes.res === false) return {
+      }
+      if (mustFields.keyList && typeof mustFields.data === 'object') {
+        const loseKey = mustFields.keyList.find(
+          (key) => mustFields.data[key] === undefined
+        )
+        if (loseKey) {
+          return {
             code: -1,
-            msg: customValidRes.msg,
+            msg: `缺少参数 ${loseKey}`
+          }
         }
-
-        const res = await waitService()
-        return {
-            code: 200,
-            data: res
-        }
-    } catch (err) {
-        return {
-            code: 0,
-            msg: err,
-        }
+      }
     }
+
+    // 自定义校验
+    const customValidRes = customValid ? customValid() : ''
+    if (customValidRes && customValidRes.res === false)
+      return {
+        code: -1,
+        msg: customValidRes.msg
+      }
+
+    const res = await waitService()
+    return {
+      code: 200,
+      data: res
+    }
+  } catch (err) {
+    return {
+      code: 0,
+      msg: err.toString()
+    }
+  }
+}
+
+export class FileSizeValidationPipe implements PipeTransform {
+  transform(value: any, metadata: ArgumentMetadata): any {
+    const size = 1000
+    if (value.size > size) return false
+    return value
+  }
+}
+
+export function getSysTime() {
+  return new Date().toLocaleDateString().replaceAll('/', '-')
 }
