@@ -9,6 +9,7 @@ import { TalkModule } from './talk/talk.module'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { FileModule } from './file/file.module'
 import { dbPath } from '../setting'
+import { InterviewModule } from './interview/interview.module'
 
 @Module({
   imports: [
@@ -27,7 +28,8 @@ import { dbPath } from '../setting'
       // entities: [__dirname + "/**/*.entity{.ts,.js}"],
       synchronize: true
     }),
-    FileModule
+    FileModule,
+    InterviewModule
   ],
   controllers: [AppController],
   providers: [AppService]

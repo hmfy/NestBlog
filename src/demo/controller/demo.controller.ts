@@ -9,9 +9,9 @@ export class DemoController {
         private demoService: DemoService
     ) {}
 
-    @Get('query')
-    async query (@Request() params):Promise<CustomRes> {
-        return wrapperService(() => this.demoService.query(params))
+    @Post('query')
+    async query (@Body() data):Promise<CustomRes> {
+        return wrapperService(() => this.demoService.query(data))
     }
 
     @Post('add')

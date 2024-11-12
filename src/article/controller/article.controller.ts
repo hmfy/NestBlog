@@ -16,10 +16,10 @@ export class ArticleController {
   constructor(private articleService: ArticleService) {}
 
   @ApiOperation({ summary: '获取文章' })
-  @Get('query')
-  async getArticle(@Query() params: GetArticleDto): Promise<CustomRes> {
-    return wrapperService(() => this.articleService.query(params), {
-      data: params,
+  @Post('query')
+  async getArticle(@Body() data: GetArticleDto): Promise<CustomRes> {
+    return wrapperService(() => this.articleService.query(data), {
+      data: data,
       keyList: ['index', 'size']
     })
   }
@@ -51,7 +51,7 @@ export class ArticleController {
     })
   }
   @ApiOperation({ summary: '获取所有文章总数' })
-  @Get('count')
+  @Post('count')
   async count(): Promise<CustomRes> {
     return wrapperService(() => this.articleService.allCount())
   }

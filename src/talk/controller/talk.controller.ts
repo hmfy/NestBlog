@@ -10,9 +10,9 @@ export class TalkController {
     ) {
     }
 
-    @Get('query')
-    async query (@Request() params):Promise<CustomRes> {
-        return wrapperService(() => this.talkService.query(params))
+    @Post('query')
+    async query (@Body() data):Promise<CustomRes> {
+        return wrapperService(() => this.talkService.query(data))
     }
 
     @Post('add')

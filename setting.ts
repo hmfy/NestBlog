@@ -1,4 +1,4 @@
-export const dbPath = 'db'
+export const dbPath = 'db.db'
 
 export const filePath = 'files'
 

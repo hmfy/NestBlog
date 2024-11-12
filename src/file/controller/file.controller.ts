@@ -24,9 +24,9 @@ import * as path from 'path'
 export class FileController {
   constructor(private fileService: FileService) {}
 
-  @Get('query')
-  async query(@Request() params): Promise<CustomRes> {
-    return wrapperService(() => this.fileService.query(params))
+  @Post('query')
+  async query(@Body() data): Promise<CustomRes> {
+    return wrapperService(() => this.fileService.query(data))
   }
 
   @Post('add')

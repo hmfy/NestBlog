@@ -10,9 +10,9 @@ export class LinkController {
     ) {
     }
 
-    @Get('query')
-    async query (@Request() params):Promise<CustomRes> {
-        return wrapperService(() => this.linkService.query(params))
+    @Post('query')
+    async query (@Body() data):Promise<CustomRes> {
+        return wrapperService(() => this.linkService.query(data))
     }
 
     @Post('add')

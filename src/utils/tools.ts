@@ -1,4 +1,5 @@
 import { CustomRes } from './interface'
+import { Request } from 'express'
 import { ArgumentMetadata, PipeTransform } from '@nestjs/common'
 
 export async function wrapperService(
@@ -62,4 +63,13 @@ export class FileSizeValidationPipe implements PipeTransform {
 
 export function getSysTime() {
   return new Date().toLocaleDateString().replaceAll('/', '-')
+}
+
+export const getRealIp = (req: Request): string => {
+  const result =
+    req.headers['x-forwarded-for'] ||
+    req.headers['x-real-ip'] ||
+    req.socket.remoteAddress ||
+    req.ip
+  return Array.isArray(result) ? result[0] : result
 }

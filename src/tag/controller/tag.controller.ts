@@ -8,7 +8,7 @@ import { ApiOperation } from '@nestjs/swagger'
 export class TagController {
   constructor(private tagService: TagService) {}
 
-  @Get('get')
+  @Post('query')
   async getTag(): Promise<CustomRes> {
     return wrapperService(() => this.tagService.getTag())
   }
@@ -37,7 +37,7 @@ export class TagController {
     })
   }
   @ApiOperation({ summary: '获取所有标签总数' })
-  @Get('count')
+  @Post('count')
   async count(): Promise<CustomRes> {
     return wrapperService(() => this.tagService.allCount())
   }
