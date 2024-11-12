@@ -37,4 +37,7 @@ export class TagService {
       data
     )
   }
+  allCount() {
+    return this.tagRepository.count()
+  }
 }

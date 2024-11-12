@@ -50,4 +50,9 @@ export class ArticleController {
       keyList: ['id']
     })
   }
+  @ApiOperation({ summary: '获取所有文章总数' })
+  @Get('count')
+  async count(): Promise<CustomRes> {
+    return wrapperService(() => this.articleService.allCount())
+  }
 }

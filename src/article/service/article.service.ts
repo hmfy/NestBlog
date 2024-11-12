@@ -44,4 +44,8 @@ export class ArticleService {
       body
     )
   }
+
+  allCount() {
+    return this.articleRepository.count()
+  }
 }
