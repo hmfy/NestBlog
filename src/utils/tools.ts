@@ -46,9 +46,12 @@ export async function wrapperService(
       data: res
     }
   } catch (err) {
+    const errMsg = err.toString()
     return {
       code: 0,
-      msg: err.toString()
+      msg: errMsg.includes('UNIQUE constraint')
+        ? `数据已存在，新增失败!`
+        : errMsg
     }
   }
 }

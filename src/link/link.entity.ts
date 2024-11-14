@@ -1,16 +1,16 @@
-import {Column, Entity, PrimaryGeneratedColumn} from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm'
 
 @Entity()
 export class LinkEntity {
-    @PrimaryGeneratedColumn()
-    id: number
+  @PrimaryGeneratedColumn()
+  id: number
 
-    @Column()
-    title: string
+  @Column()
+  title: string
 
-    @Column()
-    bg: string
+  @Column()
+  bg: string
 
-    @Column()
-    desc: string
+  @Column()
+  desc: string
 }

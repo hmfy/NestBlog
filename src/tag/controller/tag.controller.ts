@@ -3,37 +3,42 @@ import { TagService } from '../service/tag.service'
 import { CustomRes } from '../../utils/interface'
 import { wrapperService } from '../../utils/tools'
 import { ApiOperation } from '@nestjs/swagger'
+import { AddTagDto, DelTagDto, EditTagDto } from '../dto/tag.dto'
 
 @Controller('tag')
 export class TagController {
   constructor(private tagService: TagService) {}
 
+  @ApiOperation({ summary: '获取所有标签' })
   @Post('query')
   async getTag(): Promise<CustomRes> {
     return wrapperService(() => this.tagService.getTag())
   }
 
+  @ApiOperation({ summary: '添加标签' })
   @Post('add')
-  async addTag(@Body() data): Promise<CustomRes> {
+  async addTag(@Body() data: AddTagDto): Promise<CustomRes> {
     return wrapperService(() => this.tagService.addTag(data), {
       data,
       keyList: ['name']
     })
   }
 
+  @ApiOperation({ summary: '删除标签' })
   @Post('delete')
-  async delTag(@Body() data): Promise<CustomRes> {
+  async delTag(@Body() data: DelTagDto): Promise<CustomRes> {
     return wrapperService(() => this.tagService.deleteTag(data.id), {
       data,
       keyList: ['id']
     })
   }
 
+  @ApiOperation({ summary: '修改标签' })
   @Post('edit')
-  async editTag(@Body() data): Promise<CustomRes> {
+  async editTag(@Body() data: EditTagDto): Promise<CustomRes> {
     return wrapperService(() => this.tagService.editTag(data), {
       data,
-      keyList: ['id']
+      keyList: ['id', 'name']
     })
   }
   @ApiOperation({ summary: '获取所有标签总数' })

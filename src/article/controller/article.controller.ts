@@ -29,7 +29,7 @@ export class ArticleController {
   async addArticle(@Body() data: UpdateArticleDto): Promise<CustomRes> {
     return wrapperService(() => this.articleService.addArticle(data), {
       data,
-      keyList: ['tag']
+      keyList: ['tag', 'title', 'content']
     })
   }
 

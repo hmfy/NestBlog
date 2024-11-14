@@ -1,38 +1,47 @@
-import { Injectable } from '@nestjs/common';
-import {InjectRepository} from "@nestjs/typeorm";
-import {TalkEntity} from "../talk.entity";
-import {DeleteResult, InsertResult, Repository, UpdateResult} from "typeorm";
-import {DemoEntity} from "../../demo/demo.entity";
-import {LinkEntity} from "../../link/link.entity";
+import { Injectable } from '@nestjs/common'
+import { InjectRepository } from '@nestjs/typeorm'
+import { TalkEntity } from '../talk.entity'
+import { DeleteResult, InsertResult, Repository, UpdateResult } from 'typeorm'
 
 @Injectable()
 export class TalkService {
-    constructor(
-        @InjectRepository(TalkEntity)
-        private talkRepository: Repository<TalkEntity>
-    ) {
-    }
+  constructor(
+    @InjectRepository(TalkEntity)
+    private talkRepository: Repository<TalkEntity>
+  ) {}
 
-    query(req): Promise<TalkEntity[]> {
-        return this.talkRepository.find()
-    }
+  async query(req): Promise<{ total: number; list: TalkEntity[] }> {
+    const [list, total] = await this.talkRepository
+      .createQueryBuilder()
+      .skip((req.index - 1) * req.size)
+      .take(req.size)
+      .getManyAndCount()
 
-    add(body): Promise<InsertResult> {
-        return this.talkRepository.insert({
-            content: body.content,
-            nickname: body.nickname,
-        })
+    return {
+      list,
+      total
     }
+  }
 
-    del(id): Promise<DeleteResult> {
-        return this.talkRepository.delete({
-            id
-        })
-    }
+  add(body): Promise<InsertResult> {
+    return this.talkRepository.insert({
+      content: body.content,
+      nickname: body.nickname
+    })
+  }
 
-    edit(body): Promise<UpdateResult> {
-        return this.talkRepository.update({
-            id: body.id
-        }, body)
-    }
+  del(id): Promise<DeleteResult> {
+    return this.talkRepository.delete({
+      id
+    })
+  }
+
+  edit(body): Promise<UpdateResult> {
+    return this.talkRepository.update(
+      {
+        id: body.id
+      },
+      body
+    )
+  }
 }
