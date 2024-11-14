@@ -7,8 +7,8 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule)
 
   const options = new DocumentBuilder()
-    .setTitle('server nest')
-    .setDescription('server document')
+    .setTitle('个人博客')
+    .setDescription('接口文档，按入参要求调用')
     .setVersion('1.0.0')
     .build()
   const document = SwaggerModule.createDocument(app, options)
