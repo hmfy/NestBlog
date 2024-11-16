@@ -1,8 +1,9 @@
 import { Controller, Post, Request } from '@nestjs/common'
 import { InterviewService } from '../service/interview.service'
 import { wrapperService } from '../../utils/tools'
-import { ApiOperation } from '@nestjs/swagger'
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('访问记录')
 @Controller('interview')
 export class InterviewController {
   constructor(private interviewService: InterviewService) {}

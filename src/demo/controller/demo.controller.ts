@@ -2,8 +2,9 @@ import { Body, Controller, Get, Post, Request } from '@nestjs/common'
 import { DemoService } from '../service/demo.service'
 import { CustomRes } from '../../utils/interface'
 import { wrapperService } from '../../utils/tools'
-import { ApiOperation } from '@nestjs/swagger'
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('留言')
 @Controller('demo')
 export class DemoController {
   constructor(private demoService: DemoService) {}

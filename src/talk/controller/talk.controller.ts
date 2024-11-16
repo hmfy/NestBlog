@@ -2,9 +2,10 @@ import { Body, Controller, Get, Post, Request } from '@nestjs/common'
 import { TalkService } from '../service/talk.service'
 import { CustomRes } from '../../utils/interface'
 import { wrapperService } from '../../utils/tools'
-import { ApiOperation } from '@nestjs/swagger'
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { TalkAddDto, TalkDelDto, TalkQueryDto } from '../dto/talk.dto'
 
+@ApiTags('留言')
 @Controller('talk')
 export class TalkController {
   constructor(private talkService: TalkService) {}

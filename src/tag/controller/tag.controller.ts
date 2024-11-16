@@ -2,9 +2,10 @@ import { Body, Controller, Get, Post, Request } from '@nestjs/common'
 import { TagService } from '../service/tag.service'
 import { CustomRes } from '../../utils/interface'
 import { wrapperService } from '../../utils/tools'
-import { ApiOperation } from '@nestjs/swagger'
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { AddTagDto, DelTagDto, EditTagDto } from '../dto/tag.dto'
 
+@ApiTags('标签')
 @Controller('tag')
 export class TagController {
   constructor(private tagService: TagService) {}

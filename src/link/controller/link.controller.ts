@@ -2,9 +2,10 @@ import { Body, Controller, Get, Post, Request } from '@nestjs/common'
 import { LinkService } from '../service/link.service'
 import { CustomRes } from '../../utils/interface'
 import { wrapperService } from '../../utils/tools'
-import { ApiOperation } from '@nestjs/swagger'
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { LinkAddDto, LinkDeleteDto, LinkUpdateDto } from '../dto/link.dto';
 
+@ApiTags('友情链接')
 @Controller('link')
 export class LinkController {
   constructor(private linkService: LinkService) {}

@@ -20,10 +20,11 @@ import {
 import { FileInterceptor } from '@nestjs/platform-express'
 import { filePath } from '../../../setting'
 import * as fs from 'fs'
-import { ApiBody, ApiConsumes, ApiOperation, ApiQuery } from '@nestjs/swagger'
+import { ApiBody, ApiConsumes, ApiOperation, ApiQuery, ApiTags } from '@nestjs/swagger';
 import * as path from 'path'
 import { FileAddDto, FileDelDto, FileUploadDto } from '../dto/file.dto'
 
+@ApiTags('文件')
 @Controller('file')
 export class FileController {
   constructor(private fileService: FileService) {}
