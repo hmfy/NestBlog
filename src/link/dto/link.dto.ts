@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger'
-import { DelArticleDto } from '../../article/dto/article.dto';
+import { ArticleDelDto } from '../../article/dto/article.dto';
 
 export class LinkAddDto {
   @ApiProperty()
@@ -12,7 +12,7 @@ export class LinkAddDto {
   desc: string
 }
 
-export class LinkDeleteDto extends DelArticleDto {}
+export class LinkDeleteDto extends ArticleDelDto {}
 export class LinkUpdateDto {
   @ApiProperty()
   id: string

@@ -1,39 +1,36 @@
-import { Injectable } from '@nestjs/common';
-import { DeleteResult, InsertResult, Repository, UpdateResult } from 'typeorm';
-import { FileEntity } from '../file.entity';
-import { InjectRepository } from '@nestjs/typeorm';
+import { Injectable } from '@nestjs/common'
+import {
+  DeleteResult,
+  InsertResult,
+  Repository,
+  Stream,
+  UpdateResult
+} from 'typeorm'
+import { FileEntity } from '../file.entity'
+import { InjectRepository } from '@nestjs/typeorm'
+import { returnCur } from '../../utils/tools';
 
 @Injectable()
 export class FileService {
   constructor(
     @InjectRepository(FileEntity)
-    private fileRepository: Repository<FileEntity>,
+    private fileRepository: Repository<FileEntity>
   ) {}
 
-  query(req): Promise<FileEntity[]> {
-    return this.fileRepository.find();
+  query(): Promise<FileEntity[]> {
+    return this.fileRepository.find()
   }
 
-  add(data): Promise<InsertResult> {
-    return this.fileRepository.insert({
-      type: data.type,
-      path: data.type,
-      pid: data.pid,
-    });
+  async add(data: { path: string }): Promise<FileEntity> {
+    const res = await this.fileRepository.insert({
+      path: data.path
+    })
+    return returnCur<FileEntity>(res, this.fileRepository)
   }
 
   del(id): Promise<DeleteResult> {
     return this.fileRepository.delete({
-      id,
-    });
-  }
-
-  edit(body): Promise<UpdateResult> {
-    return this.fileRepository.update(
-      {
-        id: body.id,
-      },
-      body,
-    );
+      id
+    })
   }
 }

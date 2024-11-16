@@ -8,17 +8,12 @@ import { DemoModule } from './demo/demo.module'
 import { TalkModule } from './talk/talk.module'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { FileModule } from './file/file.module'
-import { dbPath } from '../setting'
+import { dbPath, filePath } from '../setting'
 import { InterviewModule } from './interview/interview.module'
+import { ServeStaticModule } from '@nestjs/serve-static'
 
 @Module({
   imports: [
-    ArticleModule,
-    TagModule,
-    LinkModule,
-    DemoModule,
-    TalkModule,
-    FileModule,
     TypeOrmModule.forRoot({
       type: 'sqlite',
       database: dbPath,
@@ -28,6 +23,15 @@ import { InterviewModule } from './interview/interview.module'
       // entities: [__dirname + "/**/*.entity{.ts,.js}"],
       synchronize: true
     }),
+    ServeStaticModule.forRoot({
+      rootPath: filePath
+    }),
+    ArticleModule,
+    TagModule,
+    LinkModule,
+    DemoModule,
+    TalkModule,
+    FileModule,
     FileModule,
     InterviewModule
   ],

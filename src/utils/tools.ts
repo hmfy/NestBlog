@@ -1,6 +1,12 @@
 import { CustomRes } from './interface'
 import { Request } from 'express'
 import { ArgumentMetadata, PipeTransform } from '@nestjs/common'
+import {
+  FindOptionsWhere,
+  InsertResult,
+  ObjectLiteral,
+  Repository
+} from 'typeorm'
 
 export async function wrapperService(
   waitService: () => Promise<any>,
@@ -16,7 +22,7 @@ export async function wrapperService(
       if (mustFields.data === undefined) {
         return {
           code: -1,
-          msg: `缺少参数`
+          msg: `缺少参数 ${mustFields.keyList?.[0] || ''}`
         }
       }
       if (mustFields.keyList && typeof mustFields.data === 'object') {
@@ -57,9 +63,14 @@ export async function wrapperService(
 }
 
 export class FileSizeValidationPipe implements PipeTransform {
+  private maxSize: number
+  constructor(maxSize: number) {
+    this.maxSize = maxSize
+  }
   transform(value: any, metadata: ArgumentMetadata): any {
-    const size = 1000
-    if (value.size > size) return false
+    if (!value) return false
+    console.log(value.size)
+    if (value.size > this.maxSize) return false
     return value
   }
 }
@@ -75,4 +86,9 @@ export const getRealIp = (req: Request): string => {
     req.socket.remoteAddress ||
     req.ip
   return Array.isArray(result) ? result[0] : result
+}
+
+export function returnCur<T>(res: any, repository: Repository<T>): Promise<T> {
+  const where = res.identifiers[0] as FindOptionsWhere<T>
+  return repository.findOneBy(where)
 }

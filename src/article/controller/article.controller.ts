@@ -5,7 +5,7 @@ import { CustomRes } from '../../utils/interface'
 import { wrapperService } from '../../utils/tools'
 import { ApiOperation, ApiTags } from '@nestjs/swagger'
 import {
-  DelArticleDto,
+  ArticleDelDto,
   GetArticleDto,
   UpdateArticleDto
 } from '../dto/article.dto'
@@ -35,7 +35,7 @@ export class ArticleController {
 
   @ApiOperation({ summary: '根据 Article ID 删除文章' })
   @Post('delete')
-  async deleteArticle(@Body() data: DelArticleDto): Promise<CustomRes> {
+  async deleteArticle(@Body() data: ArticleDelDto): Promise<CustomRes> {
     return wrapperService(() => this.articleService.delArticle(data.id), {
       data,
       keyList: ['id']

@@ -18,7 +18,7 @@ export class GetArticleDto {
   index: number
 }
 
-export class DelArticleDto {
+export class ArticleDelDto {
   @ApiProperty()
   id: string
 }
