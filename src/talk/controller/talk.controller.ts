@@ -24,7 +24,7 @@ export class TalkController {
   async add(@Body() data: TalkAddDto): Promise<CustomRes> {
     return wrapperService(() => this.talkService.add(data), {
       data,
-      keyList: ['nickname', 'content']
+      keyList: ['nickname', 'content', 'parentId']
     })
   }
 

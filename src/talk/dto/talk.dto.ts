@@ -11,4 +11,7 @@ export class TalkAddDto {
 
   @ApiProperty()
   content: string
+
+  @ApiProperty()
+  parentId: string
 }

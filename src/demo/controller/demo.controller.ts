@@ -4,7 +4,7 @@ import { CustomRes } from '../../utils/interface'
 import { wrapperService } from '../../utils/tools'
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 
-@ApiTags('留言')
+@ApiTags('作品')
 @Controller('demo')
 export class DemoController {
   constructor(private demoService: DemoService) {}

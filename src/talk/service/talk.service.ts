@@ -24,10 +24,7 @@ export class TalkService {
   }
 
   add(body): Promise<InsertResult> {
-    return this.talkRepository.insert({
-      content: body.content,
-      nickname: body.nickname
-    })
+    return this.talkRepository.insert(body)
   }
 
   del(id): Promise<DeleteResult> {

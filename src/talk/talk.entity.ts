@@ -8,6 +8,9 @@ export class TalkEntity {
     @Column()
     nickname: string
 
+    @Column('uuid')
+    parentId: string
+
     @CreateDateColumn({
         type: "datetime"
     })
