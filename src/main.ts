@@ -4,6 +4,7 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { join } from 'path'; // 引入 join 方法来拼接路径
 import * as swaggerUi from 'swagger-ui-express'; // 引入 swagger-ui-express
 import { PORT } from '../setting';
+import * as express from 'express';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
