@@ -6,6 +6,9 @@ import { PORT } from '../setting'
 async function bootstrap() {
   const app = await NestFactory.create(AppModule)
 
+   // 设置静态文件目录
+  app.useStaticAssets(join(__dirname, '..', 'public'));  // 设置静态文件路径
+  
   const options = new DocumentBuilder()
     .setTitle('个人博客')
     .setDescription('接口文档，按入参要求调用')
