@@ -7,7 +7,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule)
 
    // 设置静态文件目录
-  app.useStaticAssets(join(__dirname, '..', 'public'));  // 设置静态文件路径
+  //app.useStaticAssets(join(__dirname, '..', 'public'));  // 设置静态文件路径
   
   const options = new DocumentBuilder()
     .setTitle('个人博客')
