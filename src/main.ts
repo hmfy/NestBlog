@@ -8,11 +8,8 @@ import { PORT } from '../setting';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  // 提供 swagger-ui-dist 静态资源
-  app.use('/swagger-ui', swaggerUi.serve, swaggerUi.setup(undefined, {
-    customCssUrl: '/swagger-ui.css', // 自定义 Swagger UI 的 CSS 文件
-    customJsUrl: '/swagger-ui-bundle.js', // 自定义 Swagger UI 的 JS 文件
-  }));
+    // 提供 Swagger UI 静态文件
+  app.use('/swagger-ui', express.static(join(__dirname, '..', 'node_modules', 'swagger-ui-dist')));
 
   // 配置 Swagger 文档
   const options = new DocumentBuilder()
