@@ -1,6 +1,6 @@
 import * as path from 'path'
 
-export const dbPath = 'db.db'
+export const dbPath = '/tmp/database.sqlite'
 
 export const filePath = path.resolve('../', 'files')
 
