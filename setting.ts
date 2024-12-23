@@ -4,4 +4,4 @@ export const dbPath = 'db.db'
 
 export const filePath = path.resolve('../', 'files')
 
-export const PORT = 3000
+export const PORT = 3008
