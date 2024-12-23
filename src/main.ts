@@ -21,12 +21,7 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, options);
 
   // 设置 Swagger 路径，并将静态资源映射到 '/docs/swagger-ui'
-  SwaggerModule.setup('docs', app, document, {
-    customCssUrl: '/docs/swagger-ui/swagger-ui.css', // 使用 '/docs/swagger-ui' 作为前缀
-    customJs: '/docs/swagger-ui/swagger-ui-bundle.js', // 更正为 customJs
-    // customJsUrl: '/docs/swagger-ui/swagger-ui-bundle.js',
-    // customJsUrl: '/docs/swagger-ui/swagger-ui-standalone-preset.js',
-  });
+  SwaggerModule.setup('docs', app, document);
 
   await app.listen(PORT);
 }
